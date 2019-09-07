@@ -18,21 +18,14 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var connection = require("./config/connection");
 
 // Import routes and give the server access to them.
-// var routes = require("./controllers/catsController.js");
+var routes = require("./controllers/testController.js");
 
-// app.use(routes);
+app.use(routes);
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {
   // Log (server-side) when our server has started
-  connection.query("SELECT * FROM tests", function(err, result) {
-    if (err) {
-      throw err;
-    }
-    console.log(result);
-  });
   console.log("Server listening on: http://localhost:" + PORT);
 });
